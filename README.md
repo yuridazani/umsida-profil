@@ -4,32 +4,7 @@ Ini adalah proyek tugas kelompok **Pemrograman Mobile** yang menampilkan profil 
 
 ---
 
-## 📂 Struktur Proyek
-
-Semua anggota **WAJIB** bekerja **HANYA** di dalam file yang sudah ditentukan.  
 ❌ Dilarang mengubah file `main.dart` atau file milik anggota lain tanpa izin.
-
-umsida-profile/
-├── lib/
-│   ├── main.dart                 # (Dimas & Dwiki)
-│   │
-│   ├── pages/
-│   │   ├── home_page.dart        # (M. Yoga)
-│   │   ├── visi_misi_page.dart   # (Nugroho)
-│   │   ├── fakultas_page.dart    # (Achmad)
-│   │   └── kontak_page.dart      # (Aulia Zamaira)
-│   │
-│   ├── widgets/
-│   │   └── fakultas_card.dart    # (Ali Sofyan)
-│   │
-│   └── utils/
-│       └── app_colors.dart       # (Yurida Zani)
-│
-├── assets/
-│   └── images/                   # (Tempat taruh gambar kampus)
-│
-└── pubspec.yaml                  # (Yurida - untuk mendaftarkan assets)
-
 
 ---
 
