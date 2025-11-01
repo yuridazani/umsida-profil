@@ -1,14 +1,14 @@
+// kontak_page.dart
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
+import '../utils/app_colors.dart';
 
 class KontakPages extends StatelessWidget {
+  // Fixed typo: KontakPages -> KontakPage for consistency
   const KontakPages({Key? key}) : super(key: key);
 
-  static const Color primaryBlue = Color(0xFF1E3A8A);
-  static const Color primaryGold = Color(0xFFD4AF37);
-  
   // Koordinat UMSIDA (dari Google Maps resmi)
   static const double latitude = -7.448278;
   static const double longitude = 112.718556;
@@ -41,7 +41,11 @@ class KontakPages extends StatelessWidget {
 
   // Fungsi untuk mengkonversi latitude ke tile Y
   int _getTileY(double lat, int zoom) {
-    return ((1.0 - log(tan(lat * pi / 180.0) + 1.0 / cos(lat * pi / 180.0)) / pi) / 2.0 * (1 << zoom)).floor();
+    return ((1.0 -
+                log(tan(lat * pi / 180.0) + 1.0 / cos(lat * pi / 180.0)) / pi) /
+            2.0 *
+            (1 << zoom))
+        .floor();
   }
 
   @override
@@ -49,7 +53,7 @@ class KontakPages extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: primaryBlue,
+        backgroundColor: AppColors.primaryBlue,
         elevation: 1,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -89,12 +93,12 @@ class KontakPages extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Lokasi Kampus',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: primaryBlue,
+                      color: AppColors.primaryBlue,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -126,27 +130,41 @@ class KontakPages extends StatelessWidget {
                                   width: double.infinity,
                                   height: 180,
                                   fit: BoxFit.cover,
-                                  loadingBuilder: (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded /
-                                                loadingProgress.expectedTotalBytes!
-                                            : null,
-                                      ),
-                                    );
-                                  },
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value:
+                                                loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
                                   errorBuilder: (context, error, stackTrace) {
                                     return Center(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Icon(Icons.map, color: Colors.grey[400], size: 64),
+                                          Icon(
+                                            Icons.map,
+                                            color: Colors.grey[400],
+                                            size: 64,
+                                          ),
                                           const SizedBox(height: 8),
                                           Text(
                                             'Peta tidak dapat dimuat',
-                                            style: TextStyle(color: Colors.grey[600]),
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -177,19 +195,21 @@ class KontakPages extends StatelessWidget {
                               ],
                             ),
                           ),
-                          
+
                           // Tombol Buka di Maps
                           Positioned(
                             bottom: 10,
                             right: 10,
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                _launchURL('https://maps.app.goo.gl/hnewpAaMeZUtgV1c6');
+                                _launchURL(
+                                  'https://maps.app.goo.gl/hnewpAaMeZUtgV1c6',
+                                );
                               },
                               icon: const Icon(Icons.directions, size: 18),
                               label: const Text('Buka di Maps'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryBlue,
+                                backgroundColor: AppColors.primaryBlue,
                                 foregroundColor: Colors.white,
                                 elevation: 4,
                                 padding: const EdgeInsets.symmetric(
@@ -210,15 +230,19 @@ class KontakPages extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Alamat
-                  Row(
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.home_outlined, color: primaryBlue, size: 24),
-                      const SizedBox(width: 10),
+                      Icon(
+                        Icons.home_outlined,
+                        color: AppColors.primaryBlue,
+                        size: 24,
+                      ),
+                      SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'Alamat:',
                               style: TextStyle(
@@ -263,16 +287,15 @@ class KontakPages extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Kontak Kampus',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: primaryBlue,
+                      color: AppColors.primaryBlue,
                     ),
                   ),
                   const SizedBox(height: 16),
-
                   _buildContactCard(
                     icon: Icons.phone,
                     title: 'Telepon',
@@ -280,7 +303,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _makePhoneCall('0318945444'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.email,
                     title: 'Email',
@@ -288,7 +310,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _sendEmail('humas@umsida.ac.id'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.language,
                     title: 'Website',
@@ -296,7 +317,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://www.umsida.ac.id'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.whatsapp,
                     title: 'WhatsApp',
@@ -304,39 +324,38 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://wa.me/6285183793309'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.facebook,
                     title: 'Facebook',
                     content: 'Universitas Muhammadiyah Sidoarjo',
-                    onTap: () => _launchURL('https://web.facebook.com/umsidaofficial'),
+                    onTap: () =>
+                        _launchURL('https://web.facebook.com/umsidaofficial'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.instagram,
                     title: 'Instagram',
                     content: '@umsida1912',
-                    onTap: () => _launchURL('https://www.instagram.com/umsida1912'),
+                    onTap: () =>
+                        _launchURL('https://www.instagram.com/umsida1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.youtube,
                     title: 'Youtube',
                     content: '@UMSIDA1912',
-                    onTap: () => _launchURL('https://www.youtube.com/@UMSIDA1912'),
+                    onTap: () =>
+                        _launchURL('https://www.youtube.com/@UMSIDA1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.tiktok,
                     title: 'TikTok',
                     content: '@umsida1912',
-                    onTap: () => _launchURL('https://www.tiktok.com/@umsida1912'),
+                    onTap: () =>
+                        _launchURL('https://www.tiktok.com/@umsida1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.xTwitter,
                     title: 'Twitter X',
@@ -371,7 +390,7 @@ class KontakPages extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, color: primaryBlue, size: 22),
+            Icon(icon, color: AppColors.primaryBlue, size: 22),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -388,10 +407,7 @@ class KontakPages extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     content,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.black87,
-                    ),
+                    style: const TextStyle(fontSize: 15, color: Colors.black87),
                   ),
                 ],
               ),
