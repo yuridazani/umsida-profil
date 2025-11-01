@@ -10,6 +10,7 @@ class VisiMisiPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Visi & Misi"),
+        centerTitle: false,
         backgroundColor: AppColors.primaryBlue,
       ),
       body: SingleChildScrollView(
@@ -18,66 +19,84 @@ class VisiMisiPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // VISI
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey[300]!),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              elevation: 4,
-              child: const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Visi",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryBlue,
-                      ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Visi",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryBlue,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Menjadi organisasi terdepan dalam inovasi digital "
-                      "untuk memberikan dampak positif bagi masyarakat.",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Menjadi perguruan tinggi unggul dan inovatif dalam pengembangan IPTEKS berdasarkan nilai-nilai Islam untuk kesejahteraan masyarakat.",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
             ),
 
             const SizedBox(height: 20),
 
             // MISI
-            Card(
-              shape: RoundedRectangleBorder(
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey[300]!),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Misi",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors
-                            .primaryBlue, // Fixed typo: primaryBlu -> primaryBlue
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Misi",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryBlue,
                     ),
-                    const SizedBox(height: 10),
-                    _missionItem("Mengembangkan solusi teknologi inovatif."),
-                    _missionItem("Meningkatkan kualitas sumber daya manusia."),
-                    _missionItem(
-                        "Menciptakan ekosistem yang mendukung transformasi digital."),
-                    _missionItem(
-                        "Memberikan layanan berkualitas dan berorientasi pengguna."),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 10),
+                  _missionItem(
+                      "Menyelenggarakan pendidikan dan pengajaran secara profesional sesuai perkembangan IPTEKS berdasarkan nilai-nilai Islam."),
+                  _missionItem(
+                      "Meningkatkan penelitian yang mendukung proses pembelajaran dan pengembangan IPTEKS untuk kesejahteraan masyarakat."),
+                  _missionItem(
+                      "Meningkatkan pengabdian kepada masyarakat untuk kesejahteraan masyarakat."),
+                  _missionItem(
+                      "Meningkatkan kerjasama dengan lembaga di dalam dan luar negeri."),
+                  _missionItem(
+                      "Meningkatkan tata kelola secara professional berdasarkan nilai-nilai Islam."),
+                  _missionItem(
+                      "Meningkatkan pembinaan dan pengembangan kemahasiswaan berdasarkan nilai-nilai Islam."),
+                ],
               ),
             ),
           ],

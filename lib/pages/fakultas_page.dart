@@ -10,6 +10,7 @@ class FakultasPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Daftar Fakultas'),
+        centerTitle: false,
         backgroundColor: AppColors.primaryBlue,
       ),
       body: ListView(
@@ -59,33 +60,41 @@ class FakultasPage extends StatelessWidget {
     required String title,
     required String description,
   }) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          children: [
-            Icon(icon, color: AppColors.primaryBlue, size: 60),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey[300]!),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: AppColors.primaryBlue, size: 60),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 8),
-                  Text(description),
-                ],
-              ),
+                ),
+                const SizedBox(height: 8),
+                Text(description),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
