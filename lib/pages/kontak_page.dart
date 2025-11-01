@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
@@ -6,9 +7,6 @@ import 'dart:math';
 class KontakPages extends StatelessWidget {
   const KontakPages({Key? key}) : super(key: key);
 
-  static const Color primaryBlue = Color(0xFF1E3A8A);
-  static const Color primaryGold = Color(0xFFD4AF37);
-  
   // Koordinat UMSIDA (dari Google Maps resmi)
   static const double latitude = -7.448278;
   static const double longitude = 112.718556;
@@ -34,22 +32,24 @@ class KontakPages extends StatelessWidget {
     }
   }
 
-  // Fungsi untuk mengkonversi longitude ke tile X
+
   int _getTileX(double lon, int zoom) {
     return ((lon + 180.0) / 360.0 * (1 << zoom)).floor();
   }
 
-  // Fungsi untuk mengkonversi latitude ke tile Y
   int _getTileY(double lat, int zoom) {
-    return ((1.0 - log(tan(lat * pi / 180.0) + 1.0 / cos(lat * pi / 180.0)) / pi) / 2.0 * (1 << zoom)).floor();
+    return ((1.0 - log(tan(lat * pi / 180.0) + 1.0 / cos(lat * pi / 180.0)) / pi) /
+            2.0 *
+            (1 << zoom))
+        .floor();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: primaryBlue,
+        backgroundColor: AppColors.primaryBlue,
         elevation: 1,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -75,12 +75,12 @@ class KontakPages extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               margin: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey[300]!),
+                border: Border.all(color: Colors.grey.shade300),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withAlpha(13),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -89,38 +89,33 @@ class KontakPages extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Lokasi Kampus',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: primaryBlue,
+                      color: AppColors.primaryBlue,
                     ),
                   ),
                   const SizedBox(height: 16),
-
-                  // Area peta dengan OpenStreetMap
                   GestureDetector(
                     onTap: () {
-                      // Ketuk pada peta untuk membuka di Google Maps
                       _launchURL('https://maps.app.goo.gl/hnewpAaMeZUtgV1c6');
                     },
                     child: Container(
                       height: 180,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.grey[300]!),
+                        border: Border.all(color: Colors.grey.shade300),
                       ),
                       child: Stack(
                         children: [
-                          // Embed OpenStreetMap
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Stack(
                               children: [
-                                // Peta latar belakang menggunakan tile server
                                 Image.network(
                                   'https://tile.openstreetmap.org/16/${_getTileX(longitude, 16)}/${_getTileY(latitude, 16)}.png',
                                   width: double.infinity,
@@ -128,38 +123,28 @@ class KontakPages extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   loadingBuilder: (context, child, loadingProgress) {
                                     if (loadingProgress == null) return child;
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded /
-                                                loadingProgress.expectedTotalBytes!
-                                            : null,
-                                      ),
-                                    );
+                                    return const Center(child: CircularProgressIndicator());
                                   },
                                   errorBuilder: (context, error, stackTrace) {
                                     return Center(
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(Icons.map, color: Colors.grey[400], size: 64),
+                                          Icon(Icons.map,
+                                              color: Colors.grey.shade400, size: 64),
                                           const SizedBox(height: 8),
                                           Text(
                                             'Peta tidak dapat dimuat',
-                                            style: TextStyle(color: Colors.grey[600]),
+                                            style: TextStyle(color: Colors.grey.shade600),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
                                 ),
-                                // Lapisan gelap untuk kontras
                                 Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.1),
-                                  ),
+                                  color: Colors.black.withAlpha(25),
                                 ),
-                                // Penanda merah di tengah
                                 Center(
                                   child: Icon(
                                     Icons.location_on,
@@ -167,7 +152,7 @@ class KontakPages extends StatelessWidget {
                                     size: 48,
                                     shadows: [
                                       Shadow(
-                                        color: Colors.black.withOpacity(0.5),
+                                        color: Colors.black.withAlpha(128),
                                         blurRadius: 4,
                                         offset: const Offset(0, 2),
                                       ),
@@ -177,20 +162,19 @@ class KontakPages extends StatelessWidget {
                               ],
                             ),
                           ),
-                          
-                          // Tombol Buka di Maps
                           Positioned(
                             bottom: 10,
                             right: 10,
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                _launchURL('https://maps.app.goo.gl/hnewpAaMeZUtgV1c6');
+                                _launchURL(
+                                    'https://maps.app.goo.gl/hnewpAaMeZUtgV1c6');
                               },
                               icon: const Icon(Icons.directions, size: 18),
                               label: const Text('Buka di Maps'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryBlue,
-                                foregroundColor: Colors.white,
+                                backgroundColor: AppColors.primaryBlue,
+                                foregroundColor: AppColors.white,
                                 elevation: 4,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 14,
@@ -206,19 +190,16 @@ class KontakPages extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 16),
-
-                  // Alamat
-                  Row(
+                  const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.home_outlined, color: primaryBlue, size: 24),
-                      const SizedBox(width: 10),
+                      Icon(Icons.home_outlined, color: AppColors.primaryBlue, size: 24),
+                      SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'Alamat:',
                               style: TextStyle(
@@ -249,12 +230,12 @@ class KontakPages extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey[300]!),
+                border: Border.all(color: Colors.grey.shade300),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withAlpha(13),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -263,16 +244,15 @@ class KontakPages extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Kontak Kampus',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: primaryBlue,
+                      color: AppColors.primaryBlue,
                     ),
                   ),
                   const SizedBox(height: 16),
-
                   _buildContactCard(
                     icon: Icons.phone,
                     title: 'Telepon',
@@ -280,7 +260,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _makePhoneCall('0318945444'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.email,
                     title: 'Email',
@@ -288,7 +267,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _sendEmail('humas@umsida.ac.id'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.language,
                     title: 'Website',
@@ -296,7 +274,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://www.umsida.ac.id'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.whatsapp,
                     title: 'WhatsApp',
@@ -304,7 +281,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://wa.me/6285183793309'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: Icons.facebook,
                     title: 'Facebook',
@@ -312,7 +288,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://web.facebook.com/umsidaofficial'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.instagram,
                     title: 'Instagram',
@@ -320,7 +295,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://www.instagram.com/umsida1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.youtube,
                     title: 'Youtube',
@@ -328,7 +302,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://www.youtube.com/@UMSIDA1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.tiktok,
                     title: 'TikTok',
@@ -336,7 +309,6 @@ class KontakPages extends StatelessWidget {
                     onTap: () => _launchURL('https://www.tiktok.com/@umsida1912'),
                   ),
                   const SizedBox(height: 12),
-
                   _buildContactCard(
                     icon: FontAwesomeIcons.xTwitter,
                     title: 'Twitter X',
@@ -352,7 +324,6 @@ class KontakPages extends StatelessWidget {
     );
   }
 
-  // Widget kartu kontak
   Widget _buildContactCard({
     required IconData icon,
     required String title,
@@ -365,13 +336,13 @@ class KontakPages extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.grey[50],
+          color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: Colors.grey.shade300),
         ),
         child: Row(
           children: [
-            Icon(icon, color: primaryBlue, size: 22),
+            Icon(icon, color: AppColors.primaryBlue, size: 22),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -382,7 +353,7 @@ class KontakPages extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Colors.grey[600],
+                      color: Colors.grey.shade600,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -396,7 +367,7 @@ class KontakPages extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey[400]),
+            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey.shade400),
           ],
         ),
       ),
