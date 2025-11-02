@@ -27,9 +27,9 @@ Ini adalah proyek tugas kelompok **Pemrograman Mobile** yang menampilkan profil 
 
 - Yoga awalnya mengerjakan homepage, namun desain berbeda dari mockup → pengerjaan diulang oleh Dimas.  
 - Dwiki tetap mengerjakan `main.dart` dan membantu perbaikan halaman fakultas & visi-misi agar sesuai mockup.  
-- Aulia tetap fokus pada kontak & lokasi.  
-- Yurida tetap sebagai repo lead, mengatur warna, assets, dan sebagian `pubspec.yaml`.  
+- Aulia tetap fokus pada kontak & lokasi dan mengerjakan laporan).  
+- Yurida tetap sebagai repo lead, mengatur warna, assets, dan sebagian `pubspec.yaml` juga ikut mengerjakan laporan.  
 - Fakultas card dikerjakan oleh Achmad.  
 - Nugroho tetap mengerjakan halaman visi & misi.  
-- Ali tidak mengerjakan apapun di dalam project.  
+- Ali tidak mengerjakan apapun di dalam project (kecuali pengerjaan laporan sebagian).  
 
