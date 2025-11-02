@@ -25,8 +25,14 @@ Ini adalah proyek tugas kelompok **Pemrograman Mobile** yang menampilkan profil 
 
 ## ⚠ Catatan Revisi Kontribusi
 
--	Tugas lib/pages/home_page.dart awalnya dikerjakan oleh M. Yoga Firnanda, namun desainnya berbeda dari mockup. Pengerjaan kemudian diulang oleh Dimas Hammam A. agar sesuai dengan mockup final.
--	Tugas lib/widgets/fakultas_card.dart awalnya diberikan kepada Ali Sofyan. Karena tidak dikerjakan, fungsionalitas card tersebut dibuat oleh Achmad Isra M. langsung di dalam file lib/pages/fakultas_page.dart.
--	M. Dwiki R. fokus pada lib/main.dart untuk pengaturan navigasi dan membantu perbaikan di halaman fakultas_page dan visi_misi_page.
--	Kontribusi Ali Sofyan hanya pada pengerjaan sebagian laporan.
+-	Tugas `lib/pages/home_page.dart` awalnya dikerjakan oleh **M. Yoga Firnanda**, namun desainnya berbeda dari mockup. Pengerjaan kemudian diulang oleh **Dimas Hammam A.** agar sesuai dengan mockup final.  
+-	Tugas `lib/widgets/fakultas_card.dart` awalnya diberikan kepada **Ali Sofyan**. Karena tidak dikerjakan, fungsionalitas card tersebut dibuat oleh **Achmad Isra M.** langsung di dalam file `lib/pages/fakultas_page.dart`.  
+-	**M. Dwiki R.** fokus pada `lib/main.dart` untuk pengaturan navigasi dan membantu perbaikan di halaman `fakultas_page` dan `visi_misi_page`.  
+-	Kontribusi **Ali Sofyan** hanya pada pengerjaan sebagian laporan.  
 
+---
+
+## 📄 Laporan Proyek
+
+Laporan lengkap proyek dapat diakses melalui tautan berikut:  
+👉 [Kelompok_1_Mobile_Programming.pdf](https://github.com/yuridazani/umsida-profil/blob/main/Kelompok_1_Mobile_Programming.pdf)
